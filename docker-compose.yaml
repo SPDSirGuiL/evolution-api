@@ -1,5 +1,5 @@
 services:
-  api:
+  api_evolution:
     container_name: evolution_api
     image: atendai/evolution-api:homolog
     restart: always
@@ -12,6 +12,7 @@ services:
       - evolution_instances:/evolution/instances
     networks:
       - evolution-net
+      - speedio
     env_file:
       - .env
     expose:
@@ -39,7 +40,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=PASSWORD
+      - POSTGRES_PASSWORD=123456
     volumes:
       - postgres_data:/var/lib/postgresql/data
     expose:
@@ -55,3 +56,7 @@ networks:
   evolution-net:
     name: evolution-net
     driver: bridge
+
+  speedio:
+      name: speedio
+      external: true
